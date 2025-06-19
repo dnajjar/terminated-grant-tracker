@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NSF Terminated Grants Scatterplot</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .tooltip {
+      position: absolute;
+      background: #fff;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 12px;
+      max-width: 300px;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    .dot { opacity: 0.75; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>NSF Terminated Grants – Semantic Scatterplot</h2>
+  <div class="controls">
+    <label>Search (Title or Institution):</label>
+    <input type="text" id="searchInput" placeholder="e.g., MIT or equity">
+    
+    <label style="margin-left: 20px;">Filter by Cluster:</label>
+    <select id="clusterSelect"><option value="all">All</option></select>
+  
+    <label style="margin-left: 20px;">State:</label>
+    <select id="stateSelect"><option value="all">All</option></select>
+  
+    <label style="margin-left: 20px;">Institution:</label>
+    <select id="institutionSelect"><option value="all">All</option></select>
+  </div>
+  <svg width="960" height="600"></svg>
+  <div class="tooltip" style="display:none;"></div>
+  <script src="scatter.js"></script>
+</body>
+</html>
