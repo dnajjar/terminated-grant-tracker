@@ -1,45 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>NSF Terminated Grants Scatterplot</title>
+  <meta charset="UTF-8" />
+  <title>NSF Terminated Grants – Scatterplot</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    body { font-family: sans-serif; margin: 20px; }
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
     .tooltip {
       position: absolute;
       background: #fff;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      pointer-events: none;
+      pointer-events: auto;
       font-size: 12px;
       max-width: 300px;
+      z-index: 999;
+      display: none;
+    }
+    .tooltip {
+      pointer-events: auto;
+      position: absolute;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 8px;
+      z-index: 999;
     }
     .controls {
       margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
     }
-    .dot { opacity: 0.75; cursor: pointer; }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    input, select {
+      padding: 4px;
+      font-size: 14px;
+      min-width: 180px;
+    }
+    .dot {
+      opacity: 0.75;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h2>NSF Terminated Grants – Semantic Scatterplot</h2>
+  <h2>NSF Terminated Grants – Data Explorer</h2>
+
   <div class="controls">
-    <label>Search (Title or Institution):</label>
-    <input type="text" id="searchInput" placeholder="e.g., MIT or equity">
-    
-    <label style="margin-left: 20px;">Filter by Cluster:</label>
-    <select id="clusterSelect"><option value="all">All</option></select>
+    <div class="control-group">
+      <label for="searchInput">Search (Title or Institution):</label>
+      <input type="text" id="searchInput" placeholder="e.g., MIT or equity">
+    </div>
   
-    <label style="margin-left: 20px;">State:</label>
-    <select id="stateSelect"><option value="all">All</option></select>
+    <div class="control-group">
+      <label for="clusterSelect">Themes:</label>
+      <select id="clusterSelect"><option value="all">All</option></select>
+    </div>
   
-    <label style="margin-left: 20px;">Institution:</label>
-    <select id="institutionSelect"><option value="all">All</option></select>
+    <div class="control-group">
+      <label for="tagSelect">Tags:</label>
+      <select id="tagSelect"><option value="all">All</option></select>
+    </div>
+  
+    <div class="control-group">
+      <label for="wokeKeywordSelect">Wokeness Keywords:</label>
+      <select id="wokeKeywordSelect"><option value="all">All</option></select>
+    </div>
+  
+    <div class="control-group">
+      <label for="stateSelect">State:</label>
+      <select id="stateSelect"><option value="all">All</option></select>
+    </div>
+  
+    <div class="control-group">
+      <label for="institutionSelect">Institution:</label>
+      <select id="institutionSelect"><option value="all">All</option></select>
+    </div>
   </div>
+  
   <svg width="960" height="600"></svg>
-  <div class="tooltip" style="display:none;"></div>
+  <div class="tooltip"></div>
+
   <script src="scatter.js"></script>
 </body>
 </html>

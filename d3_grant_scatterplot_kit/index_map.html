@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NSF Terminated Grants – Map View</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #map {
+      width: 960px;
+      height: 600px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h2>NSF Terminated Grants – Map View</h2>
+  <div id="map"></div>
+
+  <script>
+    const map = L.map("map").setView([39.5, -98.35], 4); // Center on USA
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors"
+    }).addTo(map);
+
+    d3.json("nsf_clustered_grants_d3_geocoded.json").then(data => {
+      console.log("Loaded grants:", data.length);
+
+      data.forEach(d => {
+        if (d.lat && d.lon) {
+          L.circleMarker([d.lat, d.lon], {
+            radius: 5,
+            fillColor: d.nih_semantic_flagged ? "#d62728" : "#3182bd",
+            fillOpacity: 0.8,
+            stroke: false
+          })
+          .addTo(map)
+          .bindPopup(
+            `<strong>${d.project_title}</strong><br>` +
+            `${d.org_name}<br>${d.org_city}, ${d.org_state}<br>` +
+            `<small>${d.merged_tags_str}</small>`
+          );
+        }
+      });
+    }).catch(err => console.error("Failed to load JSON:", err));
+  </script>
+</body>
+</html>
