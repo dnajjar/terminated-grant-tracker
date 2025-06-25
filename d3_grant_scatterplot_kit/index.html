@@ -57,6 +57,19 @@
 </head>
 <body>
   <h2>NSF Terminated Grants – Data Explorer</h2>
+  <div class="intro" style="margin-bottom: 1em; max-width: 960px;">
+    <p>
+      This scatterplot visualizes <strong>NSF grants that were terminated early</strong>, based on data published on 
+      <a href="https://grant-watch.us/nsf-data.html" target="_blank" rel="noopener">grant-watch.us</a>.
+      Each point represents a single grant. The position of the dots is based on the semantic content of the grant’s abstract. Grants with similar language appear closer together. You can use the filters below to explore by theme, geography, institution, or keyword.
+    </p>
+  </div>
+
+  <div class="caveat" style="font-size: 14px; margin-bottom: 1em; max-width: 960px; background: #fef9e7; padding: 10px; border-left: 4px solid #f1c40f;">
+    <strong>Note:</strong> This tool is exploratory. Grant groupings, tags, and keyword matches were generated using AI models and natural language processing techniques, and may contain inaccuracies or biases. Always review the underlying data and abstracts before drawing conclusions. For full methodology, see
+      <a href="https://github.com/dnajjar/terminated-grant-tracker/tree/main#readme" target="_blank" rel="noopener">here</a>.
+    </div>
+  </div>
 
   <div class="controls">
     <div class="control-group">
@@ -65,30 +78,36 @@
     </div>
   
     <div class="control-group">
-      <label for="clusterSelect">Themes:</label>
+      <label for="clusterSelect">Themes: Filter by thematic groupings generated using AI. Each cluster represents a set of grants with similar focus areas.</label>
       <select id="clusterSelect"><option value="all">All</option></select>
     </div>
   
     <div class="control-group">
-      <label for="tagSelect">Tags:</label>
+      <label for="tagSelect">Tags: Filter by high-level research themes such as “STEM Education” or “Workforce Development.</label>
       <select id="tagSelect"><option value="all">All</option></select>
     </div>
   
     <div class="control-group">
-      <label for="wokeKeywordSelect">Wokeness Keywords:</label>
+      <label for="wokeKeywordSelect">Wokeness Keywords: Filter by wokeness keywords (e.g. “diversity,” “gender identity”) for further exploration.</label>
       <select id="wokeKeywordSelect"><option value="all">All</option></select>
     </div>
   
-    <div class="control-group">
-      <label for="stateSelect">State:</label>
-      <select id="stateSelect"><option value="all">All</option></select>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+      <div class="control-group">
+        <label for="stateSelect" title="Filter by the U.S. state where the recipient institution is located.">
+          State:
+        </label>
+        <select id="stateSelect"><option value="all">All</option></select>
+      </div>
+    
+      <div class="control-group">
+        <label for="institutionSelect" title="Filter by the name of the recipient organization or university.">
+          Institution:
+        </label>
+        <select id="institutionSelect"><option value="all">All</option></select>
+      </div>
     </div>
-  
-    <div class="control-group">
-      <label for="institutionSelect">Institution:</label>
-      <select id="institutionSelect"><option value="all">All</option></select>
-    </div>
-  </div>
+
   
   <svg width="960" height="600"></svg>
   <div class="tooltip"></div>
