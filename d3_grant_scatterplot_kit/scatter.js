@@ -21,6 +21,11 @@ let isHoveringTooltip = false;
 let pinned = false;
 
 d3.json("nsf_clustered_grants_d3_with_urls_normalized.json").then(data => {
+  data.forEach(d => {
+    if (d.cluster_theme) {
+      d.cluster_theme = d.cluster_theme.trim().replace(/^["“”]+|["“”\.]+$/g, '');
+    }
+  });
   const xExtent = d3.extent(data, d => d.x);
   const yExtent = d3.extent(data, d => d.y);
 
@@ -88,8 +93,7 @@ d3.json("nsf_clustered_grants_d3_with_urls_normalized.json").then(data => {
       <strong>${d.title}</strong><br>
       <em>${d.institution}</em><br>${d.city}, ${d.state}<br>
       <strong>Cluster:</strong> ${d.cluster_theme}<br>
-      <strong>Tags:</strong> ${d.tags}<br>
-      <strong>Canonical:</strong> ${d.canonical_tags?.join(", ") || "—"}<br>
+      <strong>Tags:</strong> ${d.canonical_tags?.join(", ") || "—"}<br>
       ${d.woke_flagged ? `<strong>Woke Terms:</strong> ${d.woke_flag_matches?.join(", ") || ""}<br>` : ""}
       ${d.nsf_url ? `<a href="${d.nsf_url}" target="_blank">View grant</a>` : ""}
     `;
